@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Web", "WasabiUI.Web\WasabiUI.Web.csproj", "{7AA346FF-40D7-44B6-8CCB-F6DC70C50610}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Forms.Platform.Blazor", "WasabiUI.Forms.Platform.Blazor\WasabiUI.Forms.Platform.Blazor.csproj", "{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AA346FF-40D7-44B6-8CCB-F6DC70C50610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AA346FF-40D7-44B6-8CCB-F6DC70C50610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AA346FF-40D7-44B6-8CCB-F6DC70C50610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AA346FF-40D7-44B6-8CCB-F6DC70C50610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2863B8DC-169C-4FEE-B793-85D3B8EDA984}
+	EndGlobalSection
+EndGlobal
