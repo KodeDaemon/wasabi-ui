@@ -16,7 +16,7 @@ namespace WasabiUI.Forms.Platform.Blazor
         /// Gets the native view associated with this renderer.
         /// </summary>
         /// <value>The native view.</value>
-        IBuildableComponent NativeView { get; }
+        IComponentContainer NativeView { get; }
 
         /// <summary>
         /// Sets the VisualElement associated with this renderer.

@@ -8,7 +8,7 @@ using WasabiUI.Forms.Platform.Blazor;
 namespace WasabiUI.Forms.Core
 {
 
-    public interface IComponentContainer : IComponent
+    public interface IComponentContainer : IBuildableComponent
     {
         
         List<BuildableComponent> Children { get; set; }

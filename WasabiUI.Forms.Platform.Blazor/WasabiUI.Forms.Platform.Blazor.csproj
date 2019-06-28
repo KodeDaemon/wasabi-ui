@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WasabiUI.Forms.Components\WasabiUI.Forms.Components.csproj" />
     <ProjectReference Include="..\WasabiUI.Forms.Core\WasabiUI.Forms.Core.csproj" />
   </ItemGroup>
 

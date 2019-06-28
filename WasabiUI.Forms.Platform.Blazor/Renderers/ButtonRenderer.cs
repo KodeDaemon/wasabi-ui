@@ -2,9 +2,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
 using WasabiUI.Forms.Platform.Blazor.Components;
 using Xamarin.Forms;
+using WasabiUI.Forms.Components;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
@@ -21,6 +23,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         private void OnClick(UIMouseEventArgs e)
         {
+
         }
 
         protected override WasabiButton CreateNativeControl()
