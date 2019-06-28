@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WasabiUI.Forms.Core;
 using WasabiUI.Forms.Platform.Blazor.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
