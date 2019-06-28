@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WasabiUI.Forms.Core\WasabiUI.Forms.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ExposedObject">
       <HintPath>..\Lib\ExposedObject.dll</HintPath>
     </Reference>

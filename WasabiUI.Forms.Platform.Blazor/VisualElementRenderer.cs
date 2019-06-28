@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor
@@ -23,7 +24,7 @@ namespace WasabiUI.Forms.Platform.Blazor
 
         VisualElement IVisualElementRenderer.Element => Element;
 
-        public ComponentContainer NativeView => this;
+        public IComponentContainer NativeView => this;
 
         //event EventHandler<VisualElementChangedEventArgs> IVisualElementRenderer.ElementChanged
         //{

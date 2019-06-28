@@ -1,7 +1,8 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Core;
 using WasabiUI.Forms.Platform.Blazor.Components;
 using Xamarin.Forms;
 

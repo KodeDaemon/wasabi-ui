@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Core;
 
 namespace WasabiUI.Forms.Platform.Blazor
 {
@@ -22,10 +24,12 @@ namespace WasabiUI.Forms.Platform.Blazor
         }
     }
 
-    public class ComponentContainer : BuildableComponent
+
+
+    public class ComponentContainer : BuildableComponent, IComponentContainer
     {
         
-        private readonly List<BuildableComponent> _components = new List<BuildableComponent>();
+        private readonly List<IBuildableComponent> _components = new List<IBuildableComponent>();
         //private readonly List<CreateableComponent> _components = new List<CreateableComponent>();
 
         public List<BuildableComponent> Children { get; set; }
@@ -42,12 +46,12 @@ namespace WasabiUI.Forms.Platform.Blazor
             }
         }
 
-        public void RemoveChild(BuildableComponent child)
+        public void RemoveChild(IBuildableComponent child)
         {
             _components.Remove(child);
         }
 
-        public void AppendChild(BuildableComponent child)
+        public void AppendChild(IBuildableComponent child)
         {
             _components.Add(child);
         }

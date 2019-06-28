@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor
@@ -15,7 +16,7 @@ namespace WasabiUI.Forms.Platform.Blazor
         /// Gets the native view associated with this renderer.
         /// </summary>
         /// <value>The native view.</value>
-        ComponentContainer NativeView { get; }
+        IBuildableComponent NativeView { get; }
 
         /// <summary>
         /// Sets the VisualElement associated with this renderer.
