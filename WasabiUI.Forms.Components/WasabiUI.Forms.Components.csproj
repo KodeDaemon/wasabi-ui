@@ -1,22 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="WasabiTextField\WasabiTextField.razor" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="WasabiTextField\WasabiTextField.razor">
-      <Generator>MSBuild:RazorGenerateComponentDeclarationDesignTime</Generator>
-    </Content>
+    <PackageReference Include="MatBlazor" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview6.19307.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview6.19307.2" />
+    <ProjectReference Include="..\WasabiUI.Forms.Core\WasabiUI.Forms.Core.csproj" />
   </ItemGroup>
 
 </Project>
