@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <AssemblyName>WasabiUI.Forms.Platform.Blazor</AssemblyName>
+    <RootNamespace>WasabiUI.Forms.Platform.Blazor</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MatBlazor" Version="1.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ExposedObject">
+      <HintPath>..\Lib\ExposedObject.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

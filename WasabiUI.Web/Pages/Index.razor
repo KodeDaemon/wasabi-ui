@@ -1,0 +1,44 @@
+﻿@page "/te"
+@using Microsoft.AspNetCore.Components
+@using WasabiUI.Forms.Platform.Blazor
+@using WasabiUI.Forms.Platform.Blazor.Components
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+GetFormsPage()
+<WasabiButton Text="test" OnClick="@RunOnClick"></WasabiButton>
+<MatButton OnClick="@RunOnClick">Button</MatButton>
+
+
+@functions{
+    //private string myMarkup = "<p class='markup'>This is a <em>markup string</em>.</p>";
+    //ComponentBase pageMarkup = null;
+
+    //if (!Xamarin.Forms.)
+    //    {
+    //            throw new InvalidOperationException("call Forms.Init() before this");
+    //}
+    //var existingRenderer = Ooui.Forms.Platform.GetRenderer (page);
+    //        if (existingRenderer != null)
+    //            return existingRenderer.NativeView;
+
+
+    public void RunOnClick(UIMouseEventArgs e)
+    {
+    }
+
+    ComponentBase GetFormsPage()
+    {
+        //Page testPage = new TestPage();
+
+        //var existingRenderer = Platform.GetRenderer(testPage);
+        //if (existingRenderer != null)
+        //{
+        //    return existingRenderer.NativeView;
+        //}
+
+        return new WasabiButton();
+    }
+}
