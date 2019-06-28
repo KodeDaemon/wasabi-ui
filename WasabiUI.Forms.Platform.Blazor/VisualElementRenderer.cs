@@ -40,6 +40,12 @@ namespace WasabiUI.Forms.Platform.Blazor
         VisualElementPackager _packager;
         VisualElementTracker _tracker;
 
+        event EventHandler<VisualElementChangedEventArgs> IVisualElementRenderer.ElementChanged
+        {
+            add { _elementChangedHandlers.Add(value); }
+            remove { _elementChangedHandlers.Remove(value); }
+        }
+
         protected bool AutoPackage
         {
             get { return (_flags & VisualElementRendererFlags.AutoPackage) != 0; }
@@ -120,7 +126,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                 if (AutoTrack && _events == null)
                 {
                     _events = new EventTracker(this);
-                    //_events.LoadEvents(this);
+                    _events.LoadEvents(this);
                 }
 
                 element.PropertyChanged += _propertyChangedHandler;

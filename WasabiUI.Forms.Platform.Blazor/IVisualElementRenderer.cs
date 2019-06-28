@@ -28,5 +28,7 @@ namespace WasabiUI.Forms.Platform.Blazor
         void UpdateLayout();
 
         //Rect GetNativeContentGeometry();
+
+        event EventHandler<VisualElementChangedEventArgs> ElementChanged;
     }
 }

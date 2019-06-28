@@ -7,10 +7,6 @@
              x:Class="WasabiUI.Web.Pages.TestPage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry></Entry>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
             <Button Text="Click Me!" Command="{Binding ButtonCommand}"/>
         </StackLayout>
     </ContentPage.Content>

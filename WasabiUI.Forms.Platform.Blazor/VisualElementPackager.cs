@@ -21,7 +21,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                 throw new ArgumentNullException(nameof(renderer));
 
             Renderer = renderer;
-            //renderer.ElementChanged += OnRendererElementChanged;
+            renderer.ElementChanged += OnRendererElementChanged;
             SetElement(null, element ?? renderer.Element);
         }
 
@@ -52,7 +52,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                 SetElement(_element, null);
                 if (Renderer != null)
                 {
-                    //Renderer.ElementChanged -= OnRendererElementChanged;
+                    Renderer.ElementChanged -= OnRendererElementChanged;
                     Renderer = null;
                 }
             }

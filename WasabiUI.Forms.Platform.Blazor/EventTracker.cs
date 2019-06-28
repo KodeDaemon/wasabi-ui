@@ -15,7 +15,7 @@ namespace WasabiUI.Forms.Platform.Blazor
 
         readonly IVisualElementRenderer _renderer;
         bool _disposed;
-        Element _handler;
+        BuildableComponent _handler;
 
         public EventTracker(IVisualElementRenderer renderer)
         {
@@ -25,7 +25,7 @@ namespace WasabiUI.Forms.Platform.Blazor
             _collectionChangedHandler = ModelGestureRecognizersOnCollectionChanged;
 
             _renderer = renderer;
-            //_renderer.ElementChanged += OnElementChanged;
+            _renderer.ElementChanged += OnElementChanged;
         }
 
         ObservableCollection<IGestureRecognizer> ElementGestureRecognizers
@@ -47,7 +47,7 @@ namespace WasabiUI.Forms.Platform.Blazor
 
             foreach (var kvp in _gestureRecognizers)
             {
-                RemoveGestureRecognizer(_handler, kvp.Value);
+                //_handler.RemoveGestureRecognizer(_handler, kvp.Value);
                 kvp.Value.Dispose();
             }
 
@@ -101,7 +101,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                 var nativeRecognizer = GetNativeRecognizer(recognizer);
                 if (nativeRecognizer != null)
                 {
-                    AddGestureRecognizer(_handler, nativeRecognizer);
+                    //_handler.AddGestureRecognizer(nativeRecognizer);
 
                     _gestureRecognizers[recognizer] = nativeRecognizer;
                 }
@@ -113,7 +113,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                 var uiRecognizer = _gestureRecognizers[gestureRecognizer];
                 _gestureRecognizers.Remove(gestureRecognizer);
 
-                RemoveGestureRecognizer(_handler, uiRecognizer);
+                //_handler.RemoveGestureRecognizer(uiRecognizer);
                 uiRecognizer.Dispose();
             }
         }
@@ -165,17 +165,17 @@ namespace WasabiUI.Forms.Platform.Blazor
             return null;
         }
 
-        static void AddGestureRecognizer(Element element, NativeGestureRecognizer recognizer)
-        {
-            //element.AddEventListener(recognizer.EventType, recognizer.Handler);
-        }
+        //static void AddGestureRecognizer(Element element, NativeGestureRecognizer recognizer)
+        //{
+        //    //element.AddEventListener(recognizer.EventType, recognizer.Handler);
+        //}
 
-        static void RemoveGestureRecognizer(Element element, NativeGestureRecognizer recognizer)
-        {
-            //element.RemoveEventListener(recognizer.EventType, recognizer.Handler);
-        }
+        //static void RemoveGestureRecognizer(Element element, NativeGestureRecognizer recognizer)
+        //{
+        //    //element.RemoveEventListener(recognizer.EventType, recognizer.Handler);
+        //}
 
-        public void LoadEvents(Element handler)
+        public void LoadEvents(BuildableComponent handler)
         {
             if (_disposed)
                 throw new ObjectDisposedException(null);

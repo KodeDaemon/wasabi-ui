@@ -1,12 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor
 {
-    public class FormsApplication : ComponentBase
+    public class FormsApplication : BuildableComponent
     {
         Application _application;
         internal Platform Platform { get; private set; }
@@ -37,10 +39,61 @@ namespace WasabiUI.Forms.Platform.Blazor
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            IVisualElementRenderer renderer = Platform.GetRenderer(_application.MainPage);
+            //var component = ExposedObject.ExposedObject.From(this);
 
-            //builder.AddContent(0, );
-            renderer.NativeView.Build(builder);
+            //var renderHandle = component._renderHandle;
+
+            //if (!renderHandle.IsInitialized)
+            //    return;
+
+            //var componentId = (int)component._componentId;
+            //var blazorRenderer = renderHandle._renderer;
+            //var formsRenderer = Platform.GetRenderer(_application.MainPage);
+
+            //blazorRenderer.AttachAndInitComponent(formsRenderer.NativeView, componentId);
+
+            //var componentBase = GetType().BaseType.BaseType;
+
+            var bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+            var renderHandleFieldInfo = typeof(ComponentBase).GetField("_renderHandle", bindingFlags);
+
+            if (renderHandleFieldInfo != null)
+            {
+                var renderHandle = (RenderHandle)renderHandleFieldInfo?.GetValue(this);
+
+                var componentIdFieldInfo = typeof(RenderHandle).GetField("_componentId", bindingFlags);
+                if (componentIdFieldInfo != null)
+                {
+                    var componentId = (int)componentIdFieldInfo.GetValue(renderHandle);
+
+                    var rendererFieldInfo = typeof(RenderHandle).GetField("_renderer", bindingFlags);
+                    var blazorRenderer = (Renderer)rendererFieldInfo?.GetValue(renderHandle);
+
+                    if (blazorRenderer != null)
+                    {
+                        var formsRenderer = Platform.GetRenderer(_application.MainPage);
+
+                        var attachAndInitComponentMethodInfo = typeof(Renderer).GetMethod("AttachAndInitComponent", bindingFlags);
+                        attachAndInitComponentMethodInfo.Invoke(blazorRenderer, new object[] { formsRenderer.NativeView, componentId });
+
+                        formsRenderer.NativeView.Build(builder);
+                    }
+                }
+            }
+
+
+            //var bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+            //field = this.GetType().GetField("_renderer", bindingFlags);
+            //var blazorRenderer = (Renderer)field?.GetValue(renderHandle);
+
+            //MethodInfo attachAndInitComponentMethodInfo = typeof(Renderer).GetMethod("AttachAndInitComponent");
+            //attachAndInitComponentMethodInfo.Invoke(blazorRenderer, new object[] { renderer.NativeView, componentId });
+
+            //return (T)field?.GetValue(obj);
+
+
+            //var formsRenderer = Platform.GetRenderer(_application.MainPage);
+            //formsRenderer.NativeView.Build(builder);
         }
 
         void SetMainPage()

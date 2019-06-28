@@ -7,6 +7,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Components
 {
     public class WasabiButton : BuildableComponent
     {
+        [Parameter]
         public string Text { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -14,7 +15,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Components
             builder.OpenComponent<MatButton>(0);
             builder.AddAttribute(1, "ChildContent", (RenderFragment)((builder2 =>
             {
-                builder2.AddContent(2, "Button");
+                builder2.AddContent(2, Text);
             })));
             builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, OnClick));
             builder.CloseComponent();
@@ -22,9 +23,12 @@ namespace WasabiUI.Forms.Platform.Blazor.Components
 
         public Action<WasabiButton> OnClickAction;
 
-        private void OnClick(UIMouseEventArgs e)
-        {
-            OnClickAction?.Invoke(this);
-        }
+        [Parameter]
+        protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
+
+        //private void OnClick(UIMouseEventArgs e)
+        //{
+        //    OnClickAction?.Invoke(this);
+        //}
     }
 }

@@ -31,4 +31,10 @@
     <Folder Include="Shared\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ExposedObject">
+      <HintPath>..\Lib\ExposedObject.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

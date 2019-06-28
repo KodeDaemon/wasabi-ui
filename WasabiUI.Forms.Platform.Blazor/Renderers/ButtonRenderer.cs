@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using WasabiUI.Forms.Platform.Blazor.Components;
 using Xamarin.Forms;
@@ -8,15 +9,23 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
     public class ButtonRenderer : ViewRenderer<Button, WasabiButton>
     {
-        private WasabiButton NativeButton => Control;
-
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            Control.Build(builder);
+            builder.OpenComponent<WasabiButton>(0);
+            builder.AddAttribute(2, "text", Element.Text);
+            builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, OnClick));
+            builder.CloseComponent();
+
+        }
+
+        private void OnClick(UIMouseEventArgs e)
+        {
         }
 
         protected override WasabiButton CreateNativeControl()
         {
+            //var nativeControl = new WasabiButton();
+            //nativeControl.Configure(new RenderHandle());
             return new WasabiButton();
         }
 
@@ -32,7 +41,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
                     Debug.Assert(Control != null, "Control != null");
 
-                    NativeButton.OnClickAction = (button) =>
+                    Control.OnClickAction = (button) =>
                     {
                         var renderer = button.Renderer;
                         ((IButtonController)renderer.Element).SendClicked();
@@ -60,7 +69,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName == Button.TextProperty.PropertyName)
+            //if (e.PropertyName == Button.TextProperty.PropertyName)
                 UpdateText();
 
             //if (e.PropertyName == Button.TextColorProperty.PropertyName)
@@ -72,7 +81,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         void UpdateText()
         {
             //var oldText = NativeButton.Text;
-            NativeButton.Text = Element.Text;
+            Control.Text = Element.Text;
 
             //// If we went from or to having no text, we need to update the image position
             //if (IsNullOrEmpty(oldText) != IsNullOrEmpty(NativeButton.Text))

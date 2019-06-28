@@ -30,6 +30,18 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
             VisualElement oldElement = Element;
             Element = element;
+
+            RaiseElementChanged(new VisualElementChangedEventArgs(oldElement, element));
+        }
+
+        void RaiseElementChanged(VisualElementChangedEventArgs e)
+        {
+            OnElementChanged(e);
+            ElementChanged?.Invoke(this, e);
+        }
+
+        protected virtual void OnElementChanged(VisualElementChangedEventArgs e)
+        {
         }
 
         public SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)

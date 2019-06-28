@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
@@ -7,11 +8,33 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
     {
     }
 
-    public abstract class ViewRenderer<TView, TNativeView> : VisualElementRenderer<TView>
+    public abstract class ViewRenderer<TView, TNativeView> : VisualElementRenderer<TView>, IVisualNativeElementRenderer
         where TView : View
         where TNativeView : BuildableComponent
     {
         public TNativeView Control { get; private set; }
+        BuildableComponent IVisualNativeElementRenderer.Control => Control;
+
+        event EventHandler<PropertyChangedEventArgs> _elementPropertyChanged;
+        event EventHandler _controlChanging;
+        event EventHandler _controlChanged;
+
+        event EventHandler<PropertyChangedEventArgs> IVisualNativeElementRenderer.ElementPropertyChanged
+        {
+            add { _elementPropertyChanged += value; }
+            remove { _elementPropertyChanged -= value; }
+        }
+
+        event EventHandler IVisualNativeElementRenderer.ControlChanging
+        {
+            add { _controlChanging += value; }
+            remove { _controlChanging -= value; }
+        }
+        event EventHandler IVisualNativeElementRenderer.ControlChanged
+        {
+            add { _controlChanged += value; }
+            remove { _controlChanged -= value; }
+        }
 
         protected virtual TNativeView CreateNativeControl()
         {
@@ -69,6 +92,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
             }
 
             base.OnElementPropertyChanged(sender, e);
+            _elementPropertyChanged?.Invoke(this, e);
         }
 
         //protected override void OnRegisterEffect(PlatformEffect effect)

@@ -1,12 +1,14 @@
 ﻿@page "/te"
 @using Microsoft.AspNetCore.Components
 @using WasabiUI.Forms.Platform.Blazor
+@using WasabiUI.Forms.Platform.Blazor.Components
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-@GetFormsPage()
+GetFormsPage()
+<WasabiButton Text="test" OnClick="@RunOnClick"></WasabiButton>
 <MatButton OnClick="@RunOnClick">Button</MatButton>
 
 
@@ -21,7 +23,7 @@ Welcome to your new app.
     //var existingRenderer = Ooui.Forms.Platform.GetRenderer (page);
     //        if (existingRenderer != null)
     //            return existingRenderer.NativeView;
-   
+
 
     public void RunOnClick(UIMouseEventArgs e)
     {
@@ -29,14 +31,14 @@ Welcome to your new app.
 
     ComponentBase GetFormsPage()
     {
-        Page testPage = new TestPage();
+        //Page testPage = new TestPage();
 
-        var existingRenderer = Platform.GetRenderer(testPage);
-        if (existingRenderer != null)
-        {
-            return existingRenderer.NativeView;
-        }
+        //var existingRenderer = Platform.GetRenderer(testPage);
+        //if (existingRenderer != null)
+        //{
+        //    return existingRenderer.NativeView;
+        //}
 
-        return null;
+        return new WasabiButton();
     }
 }
