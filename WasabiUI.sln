@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Web", "WasabiUI.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Forms.Platform.Blazor", "WasabiUI.Forms.Platform.Blazor\WasabiUI.Forms.Platform.Blazor.csproj", "{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Forms.Components", "WasabiUI.Forms.Components\WasabiUI.Forms.Components.csproj", "{FB71D186-4A51-4D57-82C1-003C733B14C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WasabiUI.Forms.Core", "WasabiUI.Forms.Core\WasabiUI.Forms.Core.csproj", "{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A4AE3B2-9D3E-4AD4-9C19-8AA7A37088F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB71D186-4A51-4D57-82C1-003C733B14C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB71D186-4A51-4D57-82C1-003C733B14C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB71D186-4A51-4D57-82C1-003C733B14C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB71D186-4A51-4D57-82C1-003C733B14C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

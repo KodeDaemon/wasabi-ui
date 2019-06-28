@@ -1,16 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace WasabiUI.Forms.Platform.Blazor
+namespace WasabiUI.Forms.Core
 {
-    public class VisualElementChangedEventArgs : ElementChangedEventArgs<VisualElement>
-    {
-        public VisualElementChangedEventArgs(VisualElement oldElement, VisualElement newElement)
-            : base(oldElement, newElement)
-        {
-        }
-    }
-
     public class ElementChangedEventArgs<TElement> : EventArgs where TElement : Element
     {
         public ElementChangedEventArgs(TElement oldElement, TElement newElement)

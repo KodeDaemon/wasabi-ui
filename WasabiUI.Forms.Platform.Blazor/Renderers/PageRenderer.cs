@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
@@ -13,7 +14,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 
-        public ComponentContainer NativeView
+        public IComponentContainer NativeView
         {
             get { return _disposed ? null : this; }
         }

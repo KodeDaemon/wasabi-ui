@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor

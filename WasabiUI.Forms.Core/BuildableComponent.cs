@@ -1,13 +1,14 @@
-﻿using System;
+using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.SignalR;
+using WasabiUI.Forms.Core;
 
 namespace WasabiUI.Forms.Platform.Blazor
 {
-    public class BuildableComponent : ComponentBase
+    public class BuildableComponent : ComponentBase, IBuildableComponent 
     {
         public IVisualElementRenderer Renderer { get; set; }
 
@@ -59,4 +60,6 @@ namespace WasabiUI.Forms.Platform.Blazor
             }
         }
     }
+
+    
 }
