@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Components;
-using WasabiUI.Forms.Platform.Blazor;
+using WasabiUI.Forms.Core;
 
 namespace WasabiUI.Forms.Components
 {

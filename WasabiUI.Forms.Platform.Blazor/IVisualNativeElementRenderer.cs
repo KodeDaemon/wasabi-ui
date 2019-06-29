@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using WasabiUI.Forms.Core;
 
 namespace WasabiUI.Forms.Platform.Blazor
 {

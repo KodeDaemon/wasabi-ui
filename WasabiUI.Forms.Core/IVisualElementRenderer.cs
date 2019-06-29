@@ -1,8 +1,7 @@
 using System;
-using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
-namespace WasabiUI.Forms.Platform.Blazor
+namespace WasabiUI.Forms.Core
 {
     public interface IVisualElementRenderer : IRegisterable, IDisposable
     {

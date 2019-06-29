@@ -1,4 +1,5 @@
 ﻿using System;
+using WasabiUI.Forms.Core;
 
 namespace WasabiUI.Forms.Platform.Blazor
 {

@@ -4,6 +4,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor
