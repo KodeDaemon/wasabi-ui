@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Components.RenderTree;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Core
@@ -10,12 +11,15 @@ namespace WasabiUI.Forms.Core
         /// </summary>
         /// <value>The VisualElement.</value>
         VisualElement Element { get; }
+        IComponentContainer ComponentContainer { get; }
+        IWasabiComponentHandle ComponentHandle { get; set; }
 
         /// <summary>
         /// Gets the native view associated with this renderer.
         /// </summary>
         /// <value>The native view.</value>
-        IComponentContainer NativeView { get; }
+        //IComponentContainer NativeView { get; }
+        //IWasabiComponentHandle ComponentHandle { get; }
 
         /// <summary>
         /// Sets the VisualElement associated with this renderer.

@@ -17,7 +17,7 @@ namespace WasabiUI.Forms.Core
 
         public void Build(RenderTreeBuilder builder)
         {
-            Register();
+            //Register();
 
             BuildRenderTree(builder);
         }

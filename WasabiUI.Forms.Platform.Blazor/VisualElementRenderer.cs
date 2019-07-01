@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Components.RenderTree;
 using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
@@ -14,7 +15,7 @@ namespace WasabiUI.Forms.Platform.Blazor
         AutoPackage = 1 << 2
     }
 
-    public class VisualElementRenderer<TElement> : ComponentContainer, IVisualElementRenderer where TElement : VisualElement
+    public class VisualElementRenderer<TElement> : IVisualElementRenderer where TElement : VisualElement
     {
         bool disposedValue = false; // To detect redundant calls
 
@@ -24,7 +25,9 @@ namespace WasabiUI.Forms.Platform.Blazor
 
         VisualElement IVisualElementRenderer.Element => Element;
 
-        public IComponentContainer NativeView => this;
+        public IComponentContainer ComponentContainer { get; }
+
+        //public IComponentContainer NativeView => this;
 
         //event EventHandler<VisualElementChangedEventArgs> IVisualElementRenderer.ElementChanged
         //{
@@ -46,6 +49,8 @@ namespace WasabiUI.Forms.Platform.Blazor
             add { _elementChangedHandlers.Add(value); }
             remove { _elementChangedHandlers.Remove(value); }
         }
+
+
 
         protected bool AutoPackage
         {
@@ -71,12 +76,15 @@ namespace WasabiUI.Forms.Platform.Blazor
             }
         }
 
+        public IWasabiComponentHandle ComponentHandle { get; set; }
+
         //protected override bool HtmlNeedsFullEndElement => TagName == "div";
 
         public VisualElementRenderer() //: base(tagName)
         {
             //Style.Overflow = "hidden";
             _propertyChangedHandler = OnElementPropertyChanged;
+            ComponentContainer = new ComponentContainer();
         }
 
         protected virtual void OnElementChanged(ElementChangedEventArgs<TElement> e)
@@ -127,7 +135,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                 if (AutoTrack && _events == null)
                 {
                     _events = new EventTracker(this);
-                    _events.LoadEvents(this);
+                    //_events.LoadEvents(this);
                 }
 
                 element.PropertyChanged += _propertyChangedHandler;

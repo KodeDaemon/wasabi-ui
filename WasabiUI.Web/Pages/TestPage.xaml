@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -7,7 +7,9 @@
              x:Class="WasabiUI.Web.Pages.TestPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Click Me!" Command="{Binding ButtonCommand}"/>
+            <Label x:Name="CounterLabel" Text="This is a test"></Label>
+            <Entry Text="This is a test entry"></Entry>
+            <Button Text="Click Me!" Clicked="Button_OnClicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

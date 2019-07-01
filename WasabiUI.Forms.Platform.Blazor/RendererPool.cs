@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using WasabiUI.Forms.Core;
 using Xamarin.Forms;
@@ -80,7 +80,7 @@ namespace WasabiUI.Forms.Platform.Blazor
             if (renderer == null)
                 return;
 
-            var subviews = renderer.NativeView.Children;
+            var subviews = renderer.ComponentContainer.Children;
             for (var i = 0; i < subviews.Count; i++)
             {
                 var childRenderer = subviews[i] as IVisualElementRenderer;
@@ -93,7 +93,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                     if (childRenderer.Element != null && ReferenceEquals(childRenderer, Platform.GetRenderer(childRenderer.Element)))
                         childRenderer.Element.ClearValue(Platform.RendererProperty);
                 }
-                renderer.NativeView.RemoveChild(subviews[i]);
+                renderer.ComponentContainer.RemoveChild(subviews[i]);
             }
         }
 
@@ -111,7 +111,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                     //else {
                     var renderer = GetFreeRenderer(child) ?? Platform.CreateRenderer(child);
                     Platform.SetRenderer(child, renderer);
-                    _parent.NativeView.AppendChild(renderer.NativeView);
+                    //_parent.NativeView.AppendChild(renderer.NativeView);
                     //}
                 }
             }
@@ -136,7 +136,7 @@ namespace WasabiUI.Forms.Platform.Blazor
             if (newElementController.LogicalChildren.Count == 0)
                 return;
 
-            var subviews = _parent.NativeView.Children;
+            var subviews = _parent.ComponentContainer.Children;
             for (var i = 0; i < subviews.Count; i++)
             {
                 var childRenderer = subviews[i] as IVisualElementRenderer;

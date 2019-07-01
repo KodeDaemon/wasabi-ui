@@ -6,14 +6,9 @@ using WasabiUI.Forms.Core;
 
 namespace WasabiUI.Forms.Components
 {
-    public class WasabiButtonBase : ComponentBase
+    public class WasabiLabelBase : ComponentBase
     {
         [Parameter]
         public string Text { get; set; }
-
-        [Parameter]
-        protected EventCallback<UIMouseEventArgs> OnClick { get; set; }
-
-        public Action<WasabiButton> OnClickAction;
     }
 }

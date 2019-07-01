@@ -1,1 +1,7 @@
-﻿
+@using Microsoft.AspNetCore.Components
+@using MatBlazor
+
+@namespace WasabiUI.Forms.Components
+@inherits WasabiTextFieldBase
+
+<MatTextField Label="@Text" @bind-Value="@Text"></MatTextField>

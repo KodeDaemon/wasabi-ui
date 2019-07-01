@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Components;
 namespace WasabiUI.Forms.Core
 {
 
-    public interface IComponentContainer : IBuildableComponent
+    public interface IComponentContainer //: IComponent
     {
-        
-        List<BuildableComponent> Children { get; set; }
+        //RenderHandle RenderHandle { get; }
 
-        void RemoveChild(IBuildableComponent child);
+        List<IWasabiComponentHandle> Children { get; set; }
 
-        void AppendChild(IBuildableComponent child);
+        void RemoveChild(IWasabiComponentHandle child);
 
+        void AppendChild(IWasabiComponentHandle child);
 
+        void Configure(RenderHandle renderHandle);
+
+        void Render();
     }
 }
 

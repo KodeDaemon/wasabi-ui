@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+using System.Runtime.InteropServices.ComTypes;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Layouts;
 using WasabiUI.Forms.Platform.Blazor;
 using WasabiUI.Web.Shared;
@@ -14,5 +15,7 @@ namespace WasabiUI.Web.Pages
             Forms.Platform.Blazor.Forms.Init();
             LoadApplication(new FormsApp());
         }
+
+
     }
 }

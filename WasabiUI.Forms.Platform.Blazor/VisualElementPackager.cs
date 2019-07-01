@@ -71,12 +71,23 @@ namespace WasabiUI.Forms.Platform.Blazor
             //    view.IsPlatformEnabled = true;
             //    packager.Load ();
             //}
+
             //else {
-            var viewRenderer = Platform.CreateRenderer(view);
+
+            var renderHandle = ((ComponentContainer) Renderer.ComponentContainer)._renderHandle;
+            var viewRenderer = Platform.CreateRenderer(view, renderHandle);
             Platform.SetRenderer(view, viewRenderer);
 
-            var uiview = Renderer.NativeView;
-            uiview.AppendChild(viewRenderer.NativeView);
+            var componentContainer = Renderer.ComponentContainer;
+            if(viewRenderer.ComponentHandle == null)
+            {
+                viewRenderer.ComponentHandle = new WasabiComponentHandle(null)
+                {
+                    Renderer = viewRenderer
+                };
+            }
+
+            componentContainer.AppendChild(viewRenderer.ComponentHandle);
 
             EnsureChildrenOrder();
             //}
@@ -88,14 +99,14 @@ namespace WasabiUI.Forms.Platform.Blazor
                 return;
 
             var viewRenderer = Platform.GetRenderer(view);
-            if (viewRenderer == null || viewRenderer.NativeView == null)
+            if (viewRenderer == null || viewRenderer.ComponentContainer == null)
                 return;
 
             var parentRenderer = Platform.GetRenderer(_element);
-            if (parentRenderer == null || parentRenderer.NativeView == null)
+            if (parentRenderer == null || parentRenderer.ComponentContainer == null)
                 return;
 
-            parentRenderer.NativeView.RemoveChild(viewRenderer.NativeView);
+            parentRenderer.ComponentContainer.RemoveChild(viewRenderer.ComponentHandle);
         }
 
         void EnsureChildrenOrder()
@@ -113,7 +124,7 @@ namespace WasabiUI.Forms.Platform.Blazor
                 if (childRenderer == null)
                     continue;
 
-                var nativeControl = childRenderer.NativeView;
+                var nativeControl = childRenderer.ComponentContainer;
 #if __MOBILE__
                 Renderer.NativeView.BringSubviewToFront(nativeControl);
 #endif

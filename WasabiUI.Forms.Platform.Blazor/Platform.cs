@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using WasabiUI.Forms.Core;
 using WasabiUI.Forms.Platform.Blazor.Renderers;
 using Xamarin.Forms;
@@ -43,22 +44,22 @@ namespace WasabiUI.Forms.Platform.Blazor
             bindable.SetValue(Platform.RendererProperty, value);
         }
 
-        internal void SetPage(Page newRoot)
+        internal void SetPage(Page newRoot, RenderHandle renderHandle = default)
         {
             if (newRoot == null)
                 return;
             if (Page != null)
                 throw new NotImplementedException();
             Page = newRoot;
-            AddChild(Page);
+            AddChild(Page, false, renderHandle);
         }
 
-        void AddChild(VisualElement view, bool layout = false)
+        void AddChild(VisualElement view, bool layout = false, RenderHandle renderHandle = default)
         {
             if (GetRenderer(view) != null)
                 return;
 
-            IVisualElementRenderer renderView = CreateRenderer(view);
+            IVisualElementRenderer renderView = CreateRenderer(view, renderHandle);
             SetRenderer(view, renderView);
 
             //if (layout)
@@ -77,9 +78,14 @@ namespace WasabiUI.Forms.Platform.Blazor
             return GetRenderer(element) ?? CreateRenderer(element);
         }
 
-        internal static IVisualElementRenderer CreateRenderer(VisualElement element)
+        internal static IVisualElementRenderer CreateRenderer(VisualElement element, RenderHandle renderHandle = default)
         {
             IVisualElementRenderer renderer = Registrar.Registered.GetHandlerForObject<IVisualElementRenderer>(element) ?? new DefaultRenderer();
+            var componentContainer = ((ComponentContainer)renderer.ComponentContainer);
+
+            componentContainer._renderHandle = renderHandle;
+            //renderer.ComponentContainer.Configure(renderHandle);
+
             renderer.SetElement(element);
             return renderer;
         }
