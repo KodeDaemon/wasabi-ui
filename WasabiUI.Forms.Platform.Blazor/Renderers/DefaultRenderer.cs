@@ -1,11 +1,29 @@
-﻿using Xamarin.Forms;
+using System;
+using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Components;
+using WasabiUI.Forms.Core;
+using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class DefaultRenderer : VisualElementRenderer<VisualElement>
+    public class DefaultRenderer : VisualElementRenderer<View>
     {
-        public DefaultRenderer()
-        {
-        }
+        //protected override IWasabiComponentHandle<WasabiLabel> CreateComponentHandle()
+        //{
+        //    return new WasabiComponentHandle<WasabiLabel>();
+        //}
+
+        //protected override void OnElementChanged(ElementChangedEventArgs<View> e)
+        //{
+        //    base.OnElementChanged(e);
+
+        //    if (e.NewElement != null)
+        //    {
+        //        if (Control == null)
+        //        {
+        //            SetNativeControl(CreateComponentHandle());
+        //        }
+        //    }
+        //}
     }
 }

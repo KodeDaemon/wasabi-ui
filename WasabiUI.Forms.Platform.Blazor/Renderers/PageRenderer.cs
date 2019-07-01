@@ -1,63 +1,77 @@
 using System;
+using System.ComponentModel;
 using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class PageRenderer : ComponentContainer, IVisualElementRenderer
+    public class PageRenderer : VisualElementRenderer<Page>
+//VisualElementRenderer<Page>, IVisualNativeElementRenderer
+    //ComponentContainer, IVisualElementRenderer
     {
-        bool _disposed;
-        VisualElementPackager _packager;
+        //bool _disposed;
+        //VisualElementPackager _packager;
 
-        public VisualElement Element { get; private set; }
+        //public VisualElement Element { get; private set; }
 
-        public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
+        //public event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 
-        public IComponentContainer NativeView
-        {
-            get { return _disposed ? null : this; }
-        }
+        //public IComponentContainer NativeView
+        //{
+        //    get { return _disposed ? null : this; }
+        //}
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            _packager = new VisualElementPackager(this);
-            _packager.Load();
+        //public IWasabiComponentHandle ComponentHandle { get; set; }
 
-            base.BuildRenderTree(builder);
-        }
+        //protected override void BuildRenderTree(RenderTreeBuilder builder)
+        //{
+        //    _packager = new VisualElementPackager(this);
+        //    _packager.Load();
 
-        public void SetElement(VisualElement element)
-        {
-            VisualElement oldElement = Element;
-            Element = element;
+        //    base.BuildRenderTree(builder);
+        //}
 
-            RaiseElementChanged(new VisualElementChangedEventArgs(oldElement, element));
-        }
+        //public void SetElement(VisualElement element)
+        //{
+        //    VisualElement oldElement = Element;
+        //    Element = element;
 
-        void RaiseElementChanged(VisualElementChangedEventArgs e)
-        {
-            OnElementChanged(e);
-            ElementChanged?.Invoke(this, e);
-        }
+        //    RaiseElementChanged(new VisualElementChangedEventArgs(oldElement, element));
+        //}
 
-        protected virtual void OnElementChanged(VisualElementChangedEventArgs e)
-        {
-        }
+        //void RaiseElementChanged(VisualElementChangedEventArgs e)
+        //{
+        //    OnElementChanged(e);
+        //    ElementChanged?.Invoke(this, e);
+        //}
 
-        public SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
-        {
-            throw new NotImplementedException();
-        }
+        //protected virtual void OnElementChanged(VisualElementChangedEventArgs e)
+        //{
+        //}
 
-        public void UpdateLayout()
-        {
-            throw new NotImplementedException();
-        }
+        //public SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        //public void UpdateLayout()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Dispose()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void Render(RenderTreeBuilder builder)
+        //{
+        //    _packager = new VisualElementPackager(this);
+        //    _packager.Load();
+
+        //    base.Render();
+        //}
     }
 }

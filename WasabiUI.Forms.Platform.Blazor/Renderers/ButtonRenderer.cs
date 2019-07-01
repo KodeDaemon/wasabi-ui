@@ -4,33 +4,39 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
-using WasabiUI.Forms.Platform.Blazor.Components;
 using Xamarin.Forms;
-using WasabiUI.Forms.Components;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
     public class ButtonRenderer : ViewRenderer<Button, WasabiButton>
     {
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        //protected override void BuildRenderTree(RenderTreeBuilder builder)
+        //{
+        //    builder.OpenComponent<WasabiButton>(0);
+        //    builder.AddAttribute(2, "text", Element.Text);
+        //    builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, OnClick));
+        //    builder.CloseComponent();
+
+        //}
+
+        public override void Render(RenderTreeBuilder builder)
         {
             builder.OpenComponent<WasabiButton>(0);
-            builder.AddAttribute(2, "text", Element.Text);
+            builder.AddAttribute(1, "Text", Element.Text);
             builder.AddAttribute(3, "onclick", EventCallback.Factory.Create(this, OnClick));
             builder.CloseComponent();
-
         }
 
         private void OnClick(UIMouseEventArgs e)
         {
-
+            ((IButtonController)Element).SendClicked();
         }
 
-        protected override WasabiButton CreateNativeControl()
+        protected override IWasabiComponentHandle<WasabiButton> CreateComponentHandle()
         {
             //var nativeControl = new WasabiButton();
             //nativeControl.Configure(new RenderHandle());
-            return new WasabiButton();
+            return new WasabiComponentHandle<WasabiButton>();
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
@@ -41,15 +47,15 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
             {
                 if (Control == null)
                 {
-                    SetNativeControl(CreateNativeControl());
+                    SetNativeControl(CreateComponentHandle());
 
-                    Debug.Assert(Control != null, "Control != null");
+                    ///Debug.Assert(Control != null, "Control != null");
 
-                    Control.OnClickAction = (button) =>
-                    {
-                        var renderer = button.Renderer;
-                        ((IButtonController)renderer.Element).SendClicked();
-                    };
+                    //Control.OnClickAction = (button) =>
+                    //{
+                    //    var renderer = button.Renderer;
+                    //    ((IButtonController)renderer.Element).SendClicked();
+                    //};
 
                     //SetControlPropertiesFromProxy();
 
@@ -85,7 +91,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         void UpdateText()
         {
             //var oldText = NativeButton.Text;
-            Control.Text = Element.Text;
+            //Control.Text = Element.Text;
 
             //// If we went from or to having no text, we need to update the image position
             //if (IsNullOrEmpty(oldText) != IsNullOrEmpty(NativeButton.Text))

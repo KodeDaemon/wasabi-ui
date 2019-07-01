@@ -1,20 +1,23 @@
 using System;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Components.RenderTree;
 using WasabiUI.Forms.Core;
 using Xamarin.Forms;
+using IComponent = Microsoft.AspNetCore.Components.IComponent;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public abstract class ViewRenderer : ViewRenderer<View, BuildableComponent>
+    public abstract class ViewRenderer : ViewRenderer<View, IComponent>
     {
     }
 
-    public abstract class ViewRenderer<TView, TNativeView> : VisualElementRenderer<TView>, IVisualNativeElementRenderer
+    public abstract class ViewRenderer<TView, TComponent> : VisualElementRenderer<TView>, IVisualNativeElementRenderer
         where TView : View
-        where TNativeView : BuildableComponent
+        where TComponent: IComponent
     {
-        public TNativeView Control { get; private set; }
-        BuildableComponent IVisualNativeElementRenderer.Control => Control;
+        public TComponent Control { get; private set; }
+        
+        //IComponent IVisualNativeElementRenderer.Control => Control;
 
         event EventHandler<PropertyChangedEventArgs> _elementPropertyChanged;
         event EventHandler _controlChanging;
@@ -37,9 +40,9 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
             remove { _controlChanged -= value; }
         }
 
-        protected virtual TNativeView CreateNativeControl()
+        protected virtual IWasabiComponentHandle<TComponent> CreateComponentHandle()
         {
-            return default(TNativeView);
+            return default;
         }
 
         /// <summary>
@@ -58,10 +61,10 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
             base.Dispose(disposing);
 
-            if (disposing && Control != null && ManageNativeControlLifetime)
-            {
-                Control = null;
-            }
+            //if (disposing && Control != null && ManageNativeControlLifetime)
+            //{
+            //    Control = null;
+            //}
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<TView> e)
@@ -119,17 +122,19 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
             //Control.Style.BackgroundColor = color.ToOouiColor(OouiTheme.BackgroundColor);
         }
 
-        protected void SetNativeControl(BuildableComponent element)
+        protected void SetNativeControl(IWasabiComponentHandle wasabiComponentHandle)
         {
-            Control = (TNativeView)element;
-            Control.Renderer = this;
+            ComponentHandle = wasabiComponentHandle;
+            ComponentHandle.Renderer = this;
+            //Control = (TNativeView)element;
+            //Control.Renderer = this;
 
             if (Element.BackgroundColor != Xamarin.Forms.Color.Default)
                 SetBackgroundColor(Element.BackgroundColor);
 
             UpdateIsEnabled();
 
-            this.AppendChild(element);
+            this.ComponentContainer.AppendChild(wasabiComponentHandle);
         }
 
         public override void SetControlSize(Size size)
@@ -158,6 +163,10 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         }
 
         void ViewOnFocusChangeRequested(object sender, VisualElement.FocusRequestArgs focusRequestArgs)
+        {
+        }
+
+        public virtual void Render(RenderTreeBuilder builder)
         {
         }
     }
