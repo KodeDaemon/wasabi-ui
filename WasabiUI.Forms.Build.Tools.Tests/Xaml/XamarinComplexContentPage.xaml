@@ -1,0 +1,22 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+   			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="MobileApp1.MyPage1"
+             xmlns:telerikCommon="clr-namespace:Telerik.XamarinForms.Common;assembly=Telerik.XamarinForms.Common"
+             xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+             xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
+             xmlns:android="condition:__ANDROID__"
+             xmlns:ios="condition:__IOS__"
+             xmlns:wp="condition:WINDOWS_PHONE">
+    <android:StackLayout VerticalOptions="FillAndExpand">
+        <Label Text="Always visible android" VerticalOptions="Center" HorizontalOptions="Center" />
+        <android:Label Text="Android only" VerticalOptions="Center" HorizontalOptions="Center" />
+    </android:StackLayout>
+    <ios:StackLayout VerticalOptions="FillAndExpand">
+        <Label Text="Always visible ios" VerticalOptions="Center" HorizontalOptions="Center" />
+        <ios:Label Text="iOS only" VerticalOptions="Center" HorizontalOptions="Center" />
+    </ios:StackLayout>
+    <wp:StackLayout VerticalOptions="FillAndExpand">
+        <Label Text="Always visible wp" VerticalOptions="Center" HorizontalOptions="Center" />
+        <wp:Label Text="Windows Phone only" VerticalOptions="Center" HorizontalOptions="Center" />
+    </wp:StackLayout>
+</ContentPage>
