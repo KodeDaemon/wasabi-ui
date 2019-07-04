@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
@@ -7,8 +8,19 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class PageRenderer : VisualElementRenderer<Page>
-//VisualElementRenderer<Page>, IVisualNativeElementRenderer
+    public class PageRendererBase : VisualElementRenderer<Page>
+    {
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
+
+        public override void Render(RenderTreeBuilder builder)
+        {
+            
+        }
+    }
+
+    public class PageRenderer : PageRendererBase
+    //VisualElementRenderer<Page>, IVisualNativeElementRenderer
     //ComponentContainer, IVisualElementRenderer
     {
         //bool _disposed;
@@ -25,13 +37,13 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         //public IWasabiComponentHandle ComponentHandle { get; set; }
 
-        //protected override void BuildRenderTree(RenderTreeBuilder builder)
-        //{
-        //    _packager = new VisualElementPackager(this);
-        //    _packager.Load();
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            //_packager = new VisualElementPackager(this);
+            //_packager.Load();
 
-        //    base.BuildRenderTree(builder);
-        //}
+            base.BuildRenderTree(builder);
+        }
 
         //public void SetElement(VisualElement element)
         //{
@@ -73,5 +85,16 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         //    base.Render();
         //}
+        public override void Render(RenderTreeBuilder builder)
+        {
+            base.Render(builder);
+
+            builder.OpenElement(1, "div");
+            builder.AddContent(2, "I am content");
+
+            RenderComponents(ComponentContainer.Children, builder);
+
+            builder.CloseElement();
+        }
     }
 }

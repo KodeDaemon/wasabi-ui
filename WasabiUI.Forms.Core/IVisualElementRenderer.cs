@@ -34,5 +34,7 @@ namespace WasabiUI.Forms.Core
         //Rect GetNativeContentGeometry();
 
         event EventHandler<VisualElementChangedEventArgs> ElementChanged;
+
+        void Render(RenderTreeBuilder builder);
     }
 }

@@ -45,11 +45,11 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
             //else if (e.PropertyName == VisualElement.IsVisibleProperty.PropertyName && Element.IsVisible)
             //    SetNeedsDisplay();
 
-            if (e.PropertyName == Label.TextColorProperty.PropertyName)
+            if (e.PropertyName == Entry.TextColorProperty.PropertyName)
             {
                 shouldRedraw = true;
             }
-            else if (e.PropertyName == Label.TextProperty.PropertyName)
+            else if (e.PropertyName == Entry.TextProperty.PropertyName)
             {
                 shouldRedraw = true;
             }

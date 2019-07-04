@@ -166,8 +166,6 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
         }
 
-        public virtual void Render(RenderTreeBuilder builder)
-        {
-        }
+        //public abstract void Render(RenderTreeBuilder builder);
     }
 }

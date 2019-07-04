@@ -1,12 +1,35 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using MatBlazor;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
+using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor
 {
+
+    internal static class TypeInference
+    {
+        public static void CreateCascadingValue<T>(
+            RenderTreeBuilder builder,
+            int seq,
+            int __seq0,
+            T __arg0,
+            int __seq1,
+            RenderFragment __arg1)
+        {
+            builder.OpenComponent<CascadingValue<T>>(seq);
+            builder.AddAttribute(__seq0, "Value", (object)__arg0);
+            builder.AddAttribute(__seq1, "ChildContent", (MulticastDelegate)__arg1);
+            builder.CloseComponent();
+        }
+
+        
+    }
+
     [Flags]
     public enum VisualElementRendererFlags
     {
@@ -15,7 +38,9 @@ namespace WasabiUI.Forms.Platform.Blazor
         AutoPackage = 1 << 2
     }
 
-    public class VisualElementRenderer<TElement> : IVisualElementRenderer where TElement : VisualElement
+    
+
+    public abstract class VisualElementRenderer<TElement> : ComponentBase, IVisualElementRenderer where TElement : VisualElement
     {
         bool disposedValue = false; // To detect redundant calls
 
@@ -50,7 +75,7 @@ namespace WasabiUI.Forms.Platform.Blazor
             remove { _elementChangedHandlers.Remove(value); }
         }
 
-
+        public abstract void Render(RenderTreeBuilder builder);
 
         protected bool AutoPackage
         {
@@ -80,12 +105,21 @@ namespace WasabiUI.Forms.Platform.Blazor
 
         //protected override bool HtmlNeedsFullEndElement => TagName == "div";
 
-        public VisualElementRenderer() //: base(tagName)
+        protected VisualElementRenderer() //: base(tagName)
         {
             //Style.Overflow = "hidden";
             _propertyChangedHandler = OnElementPropertyChanged;
             ComponentContainer = new ComponentContainer();
         }
+
+        [Inject]
+        protected DeviceState DeviceState
+        {
+            get;
+            set;
+        }
+
+        protected string Id => IdGeneratorHelper.Generate("wasabi_id_");
 
         protected virtual void OnElementChanged(ElementChangedEventArgs<TElement> e)
         {
@@ -207,6 +241,14 @@ namespace WasabiUI.Forms.Platform.Blazor
         public void UpdateLayout()
         {
             
+        }
+
+        protected virtual void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
+        {
+            foreach (var component in components)
+            {
+                component.Renderer.Render(builder);
+            }
         }
 
         protected virtual void Dispose(bool disposing)
