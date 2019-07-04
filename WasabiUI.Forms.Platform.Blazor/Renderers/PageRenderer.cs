@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class PageRenderer : VisualElementRenderer<Page>
+    public class PageRenderer : VisualElementRenderer<Page>, IVisualNativeElementRenderer
 //VisualElementRenderer<Page>, IVisualNativeElementRenderer
     //ComponentContainer, IVisualElementRenderer
     {
@@ -73,5 +73,12 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         //    base.Render();
         //}
+        public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
+        public event EventHandler ControlChanging;
+        public event EventHandler ControlChanged;
+        public void Render(RenderTreeBuilder builder)
+        {
+            ComponentContainer.Render();
+        }
     }
 }

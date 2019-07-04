@@ -31,19 +31,19 @@ namespace WasabiUI.Forms.Platform.Blazor
         public RenderHandle _renderHandle;
         //public RenderHandle RenderHandle => _renderHandle;
 
-        private readonly List<IWasabiComponentHandle> _components = new List<IWasabiComponentHandle>();
+        //private readonly List<IWasabiComponentHandle> _components = new List<IWasabiComponentHandle>();
 
-        public List<IWasabiComponentHandle> Children { get; set; }
+        public List<IWasabiComponentHandle> Children { get; set; } = new List<IWasabiComponentHandle>();
 
         public void RemoveChild(IWasabiComponentHandle child)
         {
-            _components.Remove(child);
+            Children.Remove(child);
         }
 
         public void AppendChild(IWasabiComponentHandle child)
         {
             if (child != null)
-                _components.Add(child);
+                Children.Add(child);
         }
 
         public void Configure(RenderHandle renderHandle)
@@ -67,28 +67,26 @@ namespace WasabiUI.Forms.Platform.Blazor
 
         private void RenderContainer(RenderTreeBuilder builder)
         {
-            RenderComponents(_components, builder);
+            RenderComponents(Children, builder);
         }
 
         private void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
         {
             foreach (var component in components)
             {
-                var container = (ComponentContainer)component.Renderer.ComponentContainer;
+                //var container = (ComponentContainer)component.Renderer.ComponentContainer;
 
-                if (component.Type == null)
-                {
-                    if (container._components.Count > 0)
-                    {
-                        RenderComponents(container._components, builder);
-                    }
-                }
-                else
-                {
-                    //builder.OpenComponent(0, component.Type);
+                //if (component.Type == null)
+                //{
+                //    if (container._components.Count > 0)
+                //    {
+                //        RenderComponents(container._components, builder);
+                //    }
+                //}
+                //else
+                //{
                     ((IVisualNativeElementRenderer) component.Renderer).Render(builder);
-                    //builder.CloseComponent();
-                }
+                //}
             }
         }
     }
