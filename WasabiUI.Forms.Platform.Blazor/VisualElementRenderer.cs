@@ -112,12 +112,7 @@ namespace WasabiUI.Forms.Platform.Blazor
             ComponentContainer = new ComponentContainer();
         }
 
-        [Inject]
-        protected DeviceState DeviceState
-        {
-            get;
-            set;
-        }
+        
 
         protected string Id => IdGeneratorHelper.Generate("wasabi_id_");
 

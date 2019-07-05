@@ -1,20 +1,79 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Microsoft.AspNetCore.Components;
+using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.DependencyInjection;
 using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
-using WasabiUI.Forms.Platform.Blazor.Components;
+using WasabiUI.Forms.Core.Renderers;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class StackLayoutRendererBase : VisualElementRenderer<StackLayout>
+    
+
+    public class StackLayoutRenderer : VisualElementRenderer<StackLayout>
     {
         public override void Render(RenderTreeBuilder builder)
         {
-            //throw new System.NotImplementedException();
+            builder.OpenElement(3, "div");
+
+            BuildStyle(builder);
+
+            RenderComponents(ComponentContainer.Children, builder);
+
+            builder.CloseElement();
+        }
+
+        public void BuildStyle(RenderTreeBuilder builder)
+        {
+            var formatters = PlatformServices.ServiceProvider.GetService<IStylePropertyFormatterFactory>();
+
+            var mapper = PlatformServices.ServiceProvider.GetService<IMapper>();
+
+            var control = mapper.Map<WasabiStackLayout>(Element);
+
+            var r = new Dictionary<string, string>();
+
+            foreach (var propertyInfo in control.GetType().GetProperties())
+            {
+                var attrib = propertyInfo.GetAttributes<StylePropertyAttribute>(control.GetType()).FirstOrDefault();
+
+                if (attrib != null)
+                {
+                    var prop = propertyInfo.GetValue(control);
+
+                    var q = formatters.GetFormatter(attrib.CssPropertyName);
+                    var formatter = (IStylePropertyFormatter)Activator.CreateInstance(q, prop);
+                    var results = formatter.Generate();
+
+                    foreach (var result in results)
+                    {
+                        r[result.Item1] = ConvertMe(result.Item2);
+                    }
+                }
+            }
+
+            builder.AddAttribute(11, "style", DictionaryToProperties(r));
+        }
+
+        private string DictionaryToProperties(Dictionary<string, string> dictionary)
+        {
+            var sb = new StringBuilder();
+            foreach (var pair in dictionary)
+            {
+                sb.Append($"{pair.Key}: {pair.Value};");
+            }
+
+            return sb.ToString();
+        }
+
+        private string ConvertMe(object value)
+        {
+            return value.ToString();
         }
 
         protected override void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
@@ -26,25 +85,6 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
                 builder.CloseElement();
             }
         }
-    }
-
-    public class StackLayoutRenderer : StackLayoutRendererBase
-    {
-        public override void Render(RenderTreeBuilder builder)
-        {
-            base.Render(builder);
-
-            builder.OpenElement(3, "div");
-
-            RenderComponents(ComponentContainer.Children, builder);
-
-            builder.CloseElement();
-        }
-
-        //protected override IWasabiComponentHandle<WasabiStackLayout> CreateComponentHandle()
-        //{
-        //    return new WasabiComponentHandle<WasabiStackLayout>();
-        //}
 
         protected override void OnElementChanged(ElementChangedEventArgs<StackLayout> e)
         {
@@ -63,7 +103,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
             var shouldRedraw = false;
 
-            //base.OnElementPropertyChanged(sender, e);
+            base.OnElementPropertyChanged(sender, e);
             //if (e.PropertyName == BoxView.ColorProperty.PropertyName)
             //    SetBackgroundColor(Element.BackgroundColor);
             //else if (e.PropertyName == BoxView.CornerRadiusProperty.PropertyName)
@@ -71,7 +111,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
             //else if (e.PropertyName == VisualElement.IsVisibleProperty.PropertyName && Element.IsVisible)
             //    SetNeedsDisplay();
 
-            if (e.PropertyName == Label.TextColorProperty.PropertyName)
+            if (e.PropertyName == StackLayout.MarginProperty.PropertyName)
             {
                 shouldRedraw = true;
             }
