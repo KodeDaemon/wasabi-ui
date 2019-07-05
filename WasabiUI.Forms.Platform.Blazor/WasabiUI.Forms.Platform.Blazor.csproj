@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="MatBlazor" Version="1.2.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
   </ItemGroup>
 
   <ItemGroup>

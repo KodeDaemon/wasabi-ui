@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29009.5
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Web", "WasabiUI.Web\WasabiUI.Web.csproj", "{7AA346FF-40D7-44B6-8CCB-F6DC70C50610}"
 EndProject
@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Forms.Platform.Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Forms.Components", "WasabiUI.Forms.Components\WasabiUI.Forms.Components.csproj", "{FB71D186-4A51-4D57-82C1-003C733B14C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WasabiUI.Forms.Core", "WasabiUI.Forms.Core\WasabiUI.Forms.Core.csproj", "{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WasabiUI.Forms.Core", "WasabiUI.Forms.Core\WasabiUI.Forms.Core.csproj", "{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WasabiUI.Forms.Build.Tools", "WasabiUI.Forms.Build.Tools\WasabiUI.Forms.Build.Tools.csproj", "{676F5AE5-48B2-4017-9A98-3BF571EBBD7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WasabiUI.Forms.Build.Tools.Tests", "WasabiUI.Forms.Build.Tools.Tests\WasabiUI.Forms.Build.Tools.Tests.csproj", "{DFB48B15-B17A-4E22-A8B3-485C107CD6D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBEB1EC7-9599-4F7A-B029-D7AE1F041164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{676F5AE5-48B2-4017-9A98-3BF571EBBD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{676F5AE5-48B2-4017-9A98-3BF571EBBD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{676F5AE5-48B2-4017-9A98-3BF571EBBD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{676F5AE5-48B2-4017-9A98-3BF571EBBD7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB48B15-B17A-4E22-A8B3-485C107CD6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB48B15-B17A-4E22-A8B3-485C107CD6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB48B15-B17A-4E22-A8B3-485C107CD6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB48B15-B17A-4E22-A8B3-485C107CD6D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

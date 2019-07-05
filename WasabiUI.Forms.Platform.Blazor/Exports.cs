@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using WasabiUI.Forms.Platform.Blazor;
 using WasabiUI.Forms.Platform.Blazor.Renderers;
 using Xamarin.Forms;
@@ -14,6 +14,8 @@ using Xamarin.Forms;
 [assembly: ExportRenderer(typeof(Image), typeof(ImageRenderer))]
 [assembly: ExportRenderer(typeof(Label), typeof(LabelRenderer))]
 [assembly: ExportRenderer(typeof(Page), typeof(PageRenderer))]
+[assembly: ExportRenderer(typeof(StackLayout), typeof(StackLayoutRenderer))]
+[assembly: ExportRenderer(typeof(Slider), typeof(SliderRenderer))]
 //[assembly: ExportRenderer(typeof(LinkLabel), typeof(LinkLabelRenderer))]
 //[assembly: ExportRenderer(typeof(LinkView), typeof(LinkViewRenderer))]
 //[assembly: ExportRenderer(typeof(Picker), typeof(PickerRenderer))]

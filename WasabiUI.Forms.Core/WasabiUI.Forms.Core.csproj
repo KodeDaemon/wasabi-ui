@@ -12,7 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.540366" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ExposedObject">
+      <HintPath>..\Lib\ExposedObject.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

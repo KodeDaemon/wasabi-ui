@@ -11,7 +11,7 @@ namespace WasabiUI.Forms.Core
     {
         //RenderHandle RenderHandle { get; }
 
-        List<IWasabiComponentHandle> Children { get; set; }
+        List<IWasabiComponentHandle> Children { get; }
 
         void RemoveChild(IWasabiComponentHandle child);
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Microsoft.AspNetCore.Components;
@@ -33,7 +34,7 @@ namespace WasabiUI.Forms.Platform.Blazor
 
         private readonly List<IWasabiComponentHandle> _components = new List<IWasabiComponentHandle>();
 
-        public List<IWasabiComponentHandle> Children { get; set; }
+        public List<IWasabiComponentHandle> Children => _components;
 
         public void RemoveChild(IWasabiComponentHandle child)
         {
@@ -74,6 +75,15 @@ namespace WasabiUI.Forms.Platform.Blazor
         {
             foreach (var component in components)
             {
+
+                component.Renderer.Render(builder);
+
+                //if (component.Renderer is IVisualElementRenderer c)
+                //{
+                //    c.Render(builder);
+                //}
+
+                /*
                 var container = (ComponentContainer)component.Renderer.ComponentContainer;
 
                 if (component.Type == null)
@@ -89,6 +99,8 @@ namespace WasabiUI.Forms.Platform.Blazor
                     ((IVisualNativeElementRenderer) component.Renderer).Render(builder);
                     //builder.CloseComponent();
                 }
+                */
+                //((IVisualNativeElementRenderer)component.Renderer).Render(builder);
             }
         }
     }
