@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,14 +11,17 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class StackLayoutRendererBase : VisualElementRenderer<StackLayout>
+    public class StackLayoutRendererBase : VisualElementRenderer<StackLayout>, IVisualNativeElementRenderer
     {
-        public override void Render(RenderTreeBuilder builder)
+        public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
+        public event EventHandler ControlChanging;
+        public event EventHandler ControlChanged;
+
+        public virtual void Render(RenderTreeBuilder builder)
         {
-            //throw new System.NotImplementedException();
         }
 
-        protected override void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
+        protected void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
         {
             foreach (var component in components.Where(c => c.Renderer.GetType() != typeof(StackLayoutRenderer)))
             {

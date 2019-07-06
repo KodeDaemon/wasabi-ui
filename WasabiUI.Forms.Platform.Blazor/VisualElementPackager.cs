@@ -83,7 +83,7 @@ namespace WasabiUI.Forms.Platform.Blazor
             {
                 viewRenderer.ComponentHandle = new WasabiComponentHandle(null)
                 {
-                    Renderer = viewRenderer
+                    Renderer = (IVisualNativeElementRenderer)viewRenderer
                 };
             }
 

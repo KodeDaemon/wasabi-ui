@@ -35,6 +35,6 @@ namespace WasabiUI.Forms.Core
 
         event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 
-        void Render(RenderTreeBuilder builder);
+        //void Render(RenderTreeBuilder builder);
     }
 }
