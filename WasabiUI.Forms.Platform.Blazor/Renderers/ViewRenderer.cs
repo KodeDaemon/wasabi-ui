@@ -11,6 +11,10 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
     {
     }
 
+    public abstract class ViewRenderer<TView> : ViewRenderer<TView, IComponent> where TView : View
+    {
+    }
+
     public abstract class ViewRenderer<TView, TComponent> : VisualElementRenderer<TView>, IVisualNativeElementRenderer
         where TView : View
         where TComponent: IComponent
