@@ -9,7 +9,7 @@ namespace WasabiUI.Forms.Core
     public interface IWasabiComponentHandle
     {
         Type Type { get; set; }
-        IVisualElementRenderer Renderer { get; set; }
+        IVisualNativeElementRenderer Renderer { get; set; }
     }
 
     public interface IWasabiComponentHandle<T> : IWasabiComponentHandle where T : IComponent

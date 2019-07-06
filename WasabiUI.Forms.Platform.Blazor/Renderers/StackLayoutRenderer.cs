@@ -13,11 +13,13 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    
-
-    public class StackLayoutRenderer : VisualElementRenderer<StackLayout>
+    public class StackLayoutRenderer : VisualElementRenderer<StackLayout>, IVisualNativeElementRenderer
     {
-        public override void Render(RenderTreeBuilder builder)
+        public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
+        public event EventHandler ControlChanging;
+        public event EventHandler ControlChanged;
+        
+        public void Render(RenderTreeBuilder builder)
         {
             builder.OpenElement(3, "div");
 
@@ -76,7 +78,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
             return value.ToString();
         }
 
-        protected override void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
+        protected void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
         {
             foreach (var component in components.Where(c => c.Renderer.GetType() != typeof(StackLayoutRenderer)))
             {

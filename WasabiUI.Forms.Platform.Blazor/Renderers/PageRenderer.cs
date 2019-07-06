@@ -8,12 +8,16 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class PageRendererBase : VisualElementRenderer<Page>
+    public class PageRendererBase : VisualElementRenderer<Page>, IVisualNativeElementRenderer
     {
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        //[Parameter]
+        //public RenderFragment ChildContent { get; set; }
 
-        public override void Render(RenderTreeBuilder builder)
+        public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
+        public event EventHandler ControlChanging;
+        public event EventHandler ControlChanged;
+
+        public virtual void Render(RenderTreeBuilder builder)
         {
             
         }
@@ -37,13 +41,13 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         //public IWasabiComponentHandle ComponentHandle { get; set; }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-        {
-            //_packager = new VisualElementPackager(this);
-            //_packager.Load();
+        //protected override void BuildRenderTree(RenderTreeBuilder builder)
+        //{
+        //    //_packager = new VisualElementPackager(this);
+        //    //_packager.Load();
 
-            base.BuildRenderTree(builder);
-        }
+        //    base.BuildRenderTree(builder);
+        //}
 
         //public void SetElement(VisualElement element)
         //{
@@ -87,14 +91,15 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         //}
         public override void Render(RenderTreeBuilder builder)
         {
-            base.Render(builder);
+            ComponentContainer.Render();
+            //base.Render(builder);
 
-            builder.OpenElement(1, "div");
-            builder.AddContent(2, "I am content");
+            //builder.OpenElement(1, "div");
+            ////builder.AddContent(2, "I am content");
 
-            RenderComponents(ComponentContainer.Children, builder);
+            //RenderComponents(ComponentContainer.Children, builder);
 
-            builder.CloseElement();
+            //builder.CloseElement();
         }
     }
 }
