@@ -19,7 +19,7 @@ namespace WasabiUI.Forms.Platform.Blazor
     public class WasabiComponentHandle : IWasabiComponentHandle
     {
         public Type Type { get; set; }
-        public IVisualElementRenderer Renderer { get; set; }
+        public IVisualNativeElementRenderer Renderer { get; set; }
 
         public WasabiComponentHandle(Type type)
         {
