@@ -45,7 +45,7 @@ namespace WasabiUI.Forms.Platform.Blazor
 
     
 
-    public abstract class VisualElementRenderer<TElement> : ComponentBase, IVisualElementRenderer where TElement : VisualElement
+    public abstract class VisualElementRenderer<TElement> : IVisualElementRenderer where TElement : VisualElement
     {
         bool disposedValue = false; // To detect redundant calls
 
@@ -80,7 +80,7 @@ namespace WasabiUI.Forms.Platform.Blazor
             remove { _elementChangedHandlers.Remove(value); }
         }
 
-        public abstract void Render(RenderTreeBuilder builder);
+        //public abstract void Render(RenderTreeBuilder builder);
 
         protected virtual void BuildStyle<T>(RenderTreeBuilder builder)
         {
@@ -291,13 +291,13 @@ namespace WasabiUI.Forms.Platform.Blazor
             
         }
 
-        protected virtual void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
-        {
-            foreach (var component in components)
-            {
-                component.Renderer.Render(builder);
-            }
-        }
+        //protected virtual void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
+        //{
+        //    foreach (var component in components)
+        //    {
+        //        component.Renderer.Render(builder);
+        //    }
+        //}
 
         protected virtual void Dispose(bool disposing)
         {

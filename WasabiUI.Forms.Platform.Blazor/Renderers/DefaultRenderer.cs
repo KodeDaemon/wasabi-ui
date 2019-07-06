@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Linq;
 using Microsoft.AspNetCore.Components.RenderTree;
 using WasabiUI.Forms.Components;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
 {
-    public class DefaultRenderer : VisualElementRenderer<View>
+    public class DefaultRenderer : VisualElementRenderer<View>, IVisualNativeElementRenderer
     {
         //protected override IWasabiComponentHandle<WasabiLabel> CreateComponentHandle()
         //{
@@ -26,14 +27,19 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         //        }
         //    }
         //}
-        public override void Render(RenderTreeBuilder builder)
+        public event EventHandler<PropertyChangedEventArgs> ElementPropertyChanged;
+        public event EventHandler ControlChanging;
+        public event EventHandler ControlChanged;
+
+        public void Render(RenderTreeBuilder builder)
         {
             var hasChildren = ComponentContainer.Children.Any();
 
             if (hasChildren)
             {
                 builder.OpenElement(1, "div");
-                RenderComponents(ComponentContainer.Children, builder);
+                //RenderComponents(ComponentContainer.Children, builder);
+                ComponentContainer.Render();
                 builder.CloseElement();
             }
             else

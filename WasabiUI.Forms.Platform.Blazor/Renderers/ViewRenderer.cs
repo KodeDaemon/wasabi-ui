@@ -182,6 +182,11 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
         }
 
+        public virtual void Render(RenderTreeBuilder builder)
+        {
+            throw new NotImplementedException();
+        }
+
         //public abstract void Render(RenderTreeBuilder builder);
     }
 }

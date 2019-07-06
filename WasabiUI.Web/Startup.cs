@@ -1,3 +1,4 @@
+using AutoMapper;
 using EmbeddedBlazorContent;
 using MatBlazor;
 using Microsoft.AspNetCore.Builder;
@@ -5,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WasabiUI.Forms.Core;
+using WasabiUI.Forms.Platform.Blazor.Formatters;
+using WasabiUI.Forms.Platform.Blazor.Maps;
 using WasabiUI.Web.Data;
 
 namespace WasabiUI.Web
@@ -25,6 +29,9 @@ namespace WasabiUI.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddAutoMapper(typeof(StackLayoutProfile));
+            services.AddStylePropertyFormatters(typeof(MarginFormatter).Assembly);
+            services.AddWasabiPlatformServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +51,7 @@ namespace WasabiUI.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseEmbeddedBlazorContent(typeof(BaseMatComponent).Assembly);
+            app.UseWasabiPlatform();
 
             app.UseRouting();
 
