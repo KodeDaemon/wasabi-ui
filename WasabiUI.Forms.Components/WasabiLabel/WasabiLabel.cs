@@ -1,15 +1,11 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using WasabiUI.Forms.Components.Interfaces;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Components
 {
-    public partial class WasabiStackLayout : ComponentBase, IStackLayout
+    public class WasabiLabel : ComponentBase, ILabel
     {
-        public StackOrientation Orientation { get; set; }
-
-        public double Spacing { get; set; } = 0;
         public Menu Menu { get; set; }
         public string AutomationId { get; set; }
         public string ClassId { get; set; }
@@ -24,7 +20,6 @@ namespace WasabiUI.Forms.Components
         public double TranslationX { get; set; }
         public double TranslationY { get; set; }
         public double Width { get; set; }
-
         public double Height { get; set; }
         public double Rotation { get; set; }
         public double RotationX { get; set; }
@@ -41,13 +36,17 @@ namespace WasabiUI.Forms.Components
         public double MarginTop { get; set; }
         public double MarginRight { get; set; }
         public double MarginBottom { get; set; }
-        public Xamarin.Forms.Thickness Padding { get; set; }
-        public double PaddingLeft { get; set; }
-        public double PaddingTop { get; set; }
-        public double PaddingRight { get; set; }
-        public double PaddingBottom { get; set; }
-        public bool IsClippedToBounds { get; set; }
-        public bool CascadeInputTransparent { get; set; }
-        public IList<View> Children { get; set; }
+        public TextAlignment HorizontalTextAlignment { get; set; }
+        public TextAlignment VerticalTextAlignment { get; set; }
+        public Color TextColor { get; set; }
+        public Font Font { get; set; }
+        public string Text { get; set; }
+        public string FontFamily { get; set; }
+        public double FontSize { get; set; }
+        public FontAttributes FontAttributes { get; set; }
+        public TextDecorations TextDecorations { get; set; }
+        public LineBreakMode LineBreakMode { get; set; }
+        public double LineHeight { get; set; }
+        public int MaxLines { get; set; }
     }
 }

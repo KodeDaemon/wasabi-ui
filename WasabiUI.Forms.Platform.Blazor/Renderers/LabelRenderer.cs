@@ -10,9 +10,14 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
     {
         public override void Render(RenderTreeBuilder builder)
         {
-            builder.OpenComponent<WasabiLabel>(0);
-            builder.AddAttribute(1, "Text", Element.Text);
-            builder.CloseComponent();
+            builder.OpenElement(1, "label");
+            BuildStyle<WasabiLabel>(builder);
+            builder.AddAttribute(1, "Text", Control.Text);
+            builder.CloseElement();
+            
+            //builder.OpenComponent<WasabiLabel>(0);
+            //builder.AddAttribute(1, "Text", Element.Text);
+            //builder.CloseComponent();
         }
 
         protected override IWasabiComponentHandle<WasabiLabel> CreateComponentHandle()

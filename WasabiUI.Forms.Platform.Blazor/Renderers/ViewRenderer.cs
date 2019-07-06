@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel;
+using AutoMapper;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.DependencyInjection;
 using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 using IComponent = Microsoft.AspNetCore.Components.IComponent;
@@ -61,6 +63,11 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
         }
 
+        protected override void BuildStyle<T>(RenderTreeBuilder builder)
+        {
+            base.BuildStyle<T>(builder);
+        }
+
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -84,6 +91,11 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
                     SetBackgroundColor(e.NewElement.BackgroundColor);
 
                 e.NewElement.FocusChangeRequested += ViewOnFocusChangeRequested;
+
+                var mapper = PlatformServices.ServiceProvider.GetService<IMapper>();
+
+                Control = mapper.Map<TComponent>(Element);
+
             }
 
             UpdateIsEnabled();

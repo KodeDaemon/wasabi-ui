@@ -1,11 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using AutoMapper;
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.DependencyInjection;
 using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
+using WasabiUI.Forms.Core.Renderers;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor
@@ -76,6 +81,54 @@ namespace WasabiUI.Forms.Platform.Blazor
         }
 
         //public abstract void Render(RenderTreeBuilder builder);
+
+        protected virtual void BuildStyle<T>(RenderTreeBuilder builder)
+        {
+            var formatters = PlatformServices.ServiceProvider.GetService<IStylePropertyFormatterFactory>();
+
+            var mapper = PlatformServices.ServiceProvider.GetService<IMapper>();
+
+            var control = mapper.Map<T>(Element);
+
+            var r = new Dictionary<string, string>();
+
+            foreach (var propertyInfo in control.GetType().GetProperties())
+            {
+                var attrib = propertyInfo.GetAttributes<StylePropertyAttribute>(control.GetType()).FirstOrDefault();
+
+                if (attrib != null)
+                {
+                    var prop = propertyInfo.GetValue(control);
+
+                    var q = formatters.GetFormatter(attrib.CssPropertyName);
+                    var formatter = (IStylePropertyFormatter)Activator.CreateInstance(q, prop);
+                    var results = formatter.Generate();
+
+                    foreach (var result in results)
+                    {
+                        r[result.Item1] = ConvertStylePropertyValue(result.Item2);
+                    }
+                }
+            }
+
+            builder.AddAttribute(11, "style", DictionaryToProperties(r));
+        }
+
+        protected virtual string DictionaryToProperties(Dictionary<string, string> dictionary)
+        {
+            var sb = new StringBuilder();
+            foreach (var (key, value) in dictionary)
+            {
+                sb.Append($"{key}: {value};");
+            }
+
+            return sb.ToString();
+        }
+
+        protected virtual string ConvertStylePropertyValue(object value)
+        {
+            return value.ToString();
+        }
 
         protected bool AutoPackage
         {
