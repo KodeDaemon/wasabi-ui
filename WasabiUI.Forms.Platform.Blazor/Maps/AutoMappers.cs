@@ -11,4 +11,12 @@ namespace WasabiUI.Forms.Platform.Blazor.Maps
             CreateMap<StackLayout, WasabiStackLayout>();
         }
     }
+
+    public class LabelProfile : Profile
+    {
+        public LabelProfile()
+        {
+            CreateMap<Label, WasabiLabel>();
+        }
+    }
 }

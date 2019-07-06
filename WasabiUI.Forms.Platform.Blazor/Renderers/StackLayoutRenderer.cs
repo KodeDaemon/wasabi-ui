@@ -21,59 +21,26 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         {
             builder.OpenElement(3, "div");
 
-            BuildStyle(builder);
+            BuildStyle<WasabiStackLayout>(builder);
 
             RenderComponents(ComponentContainer.Children, builder);
 
             builder.CloseElement();
         }
 
-        public void BuildStyle(RenderTreeBuilder builder)
+        protected override void BuildStyle<T>(RenderTreeBuilder builder)
         {
-            var formatters = PlatformServices.ServiceProvider.GetService<IStylePropertyFormatterFactory>();
-
-            var mapper = PlatformServices.ServiceProvider.GetService<IMapper>();
-
-            var control = mapper.Map<WasabiStackLayout>(Element);
-
-            var r = new Dictionary<string, string>();
-
-            foreach (var propertyInfo in control.GetType().GetProperties())
-            {
-                var attrib = propertyInfo.GetAttributes<StylePropertyAttribute>(control.GetType()).FirstOrDefault();
-
-                if (attrib != null)
-                {
-                    var prop = propertyInfo.GetValue(control);
-
-                    var q = formatters.GetFormatter(attrib.CssPropertyName);
-                    var formatter = (IStylePropertyFormatter)Activator.CreateInstance(q, prop);
-                    var results = formatter.Generate();
-
-                    foreach (var result in results)
-                    {
-                        r[result.Item1] = ConvertMe(result.Item2);
-                    }
-                }
-            }
-
-            builder.AddAttribute(11, "style", DictionaryToProperties(r));
+            base.BuildStyle<T>(builder);
         }
 
-        private string DictionaryToProperties(Dictionary<string, string> dictionary)
+        protected override string DictionaryToProperties(Dictionary<string, string> dictionary)
         {
-            var sb = new StringBuilder();
-            foreach (var pair in dictionary)
-            {
-                sb.Append($"{pair.Key}: {pair.Value};");
-            }
-
-            return sb.ToString();
+            return base.DictionaryToProperties(dictionary);
         }
 
-        private string ConvertMe(object value)
+        protected override string ConvertStylePropertyValue(object value)
         {
-            return value.ToString();
+            return base.ConvertStylePropertyValue(value);
         }
 
         protected override void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)
