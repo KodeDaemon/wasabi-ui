@@ -1,8 +1,6 @@
 using System;
 using System.ComponentModel;
-using AutoMapper;
 using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.Extensions.DependencyInjection;
 using WasabiUI.Forms.Core;
 using Xamarin.Forms;
 using IComponent = Microsoft.AspNetCore.Components.IComponent;
@@ -21,10 +19,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         where TView : View
         where TComponent: IComponent
     {
-        public TComponent Control { get; private set; }
         
-        //IComponent IVisualNativeElementRenderer.Control => Control;
-
         event EventHandler<PropertyChangedEventArgs> _elementPropertyChanged;
         event EventHandler _controlChanging;
         event EventHandler _controlChanged;
@@ -57,17 +52,6 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         /// </summary>
         protected virtual bool ManageNativeControlLifetime => true;
 
-        //protected override bool HtmlNeedsFullEndElement => TagName == "div";
-
-        public ViewRenderer()
-        {
-        }
-
-        protected override void BuildStyle<T>(RenderTreeBuilder builder)
-        {
-            base.BuildStyle<T>(builder);
-        }
-
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -87,15 +71,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
             if (e.NewElement != null)
             {
-                if (Control != null && e.OldElement != null && e.OldElement.BackgroundColor != e.NewElement.BackgroundColor || e.NewElement.BackgroundColor != Xamarin.Forms.Color.Default)
-                    SetBackgroundColor(e.NewElement.BackgroundColor);
-
                 e.NewElement.FocusChangeRequested += ViewOnFocusChangeRequested;
-
-                var mapper = PlatformServices.ServiceProvider.GetService<IMapper>();
-
-                Control = mapper.Map<TComponent>(Element);
-
             }
 
             UpdateIsEnabled();
@@ -103,39 +79,18 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (Control != null)
-            {
-                if (e.PropertyName == VisualElement.IsEnabledProperty.PropertyName)
-                    UpdateIsEnabled();
-                else if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
-                    SetBackgroundColor(Element.BackgroundColor);
-            }
-
             base.OnElementPropertyChanged(sender, e);
             _elementPropertyChanged?.Invoke(this, e);
         }
 
-        //protected override void OnRegisterEffect(PlatformEffect effect)
-        //{
-        //    base.OnRegisterEffect(effect);
-        //    //effect.Control = Control;
-        //}
-
         protected override void SetAutomationId(string id)
         {
-            if (Control == null)
-                base.SetAutomationId(id);
-            else
-            {
-            }
+
         }
 
         protected override void SetBackgroundColor(Xamarin.Forms.Color color)
         {
-            if (Control == null)
-                return;
 
-            //Control.Style.BackgroundColor = color.ToOouiColor(OouiTheme.BackgroundColor);
         }
 
         protected void SetNativeControl(IWasabiComponentHandle wasabiComponentHandle)
@@ -155,11 +110,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         public override void SetControlSize(Size size)
         {
-            if (Control != null)
-            {
-                //Control.Style.Width = size.Width;
-                //Control.Style.Height = size.Height;
-            }
+
         }
 
         protected override void SendVisualElementInitialized(VisualElement element, Element nativeView)
@@ -169,13 +120,7 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
         void UpdateIsEnabled()
         {
-            //if (Element == null || Control == null)
-            //    return;
-
-            //var uiControl = Control as Ooui.FormControl;
-            //if (uiControl == null)
-            //    return;
-            //uiControl.IsDisabled = !Element.IsEnabled;
+            
         }
 
         void ViewOnFocusChangeRequested(object sender, VisualElement.FocusRequestArgs focusRequestArgs)

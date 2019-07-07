@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Components
 {
-    public class WasabiLabel : ComponentBase, ILabel
+    public class WasabiLabel : WasabiComponentBase, ILabel
     {
         public Menu Menu { get; set; }
         public string AutomationId { get; set; }

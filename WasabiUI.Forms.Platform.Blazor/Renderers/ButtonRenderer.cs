@@ -45,7 +45,8 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
 
             if (e.NewElement != null)
             {
-                if (Control == null)
+                
+                if (ComponentHandle == null)
                 {
                     SetNativeControl(CreateComponentHandle());
 
@@ -72,7 +73,9 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
                 //UpdateFont();
                 //UpdateTextColor();
                 //_buttonLayoutManager?.Update();
+
             }
+            
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

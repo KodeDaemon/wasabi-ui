@@ -5,8 +5,13 @@ using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Components
 {
-    public partial class WasabiStackLayout : ComponentBase, IStackLayout
+    public class WasabiStackLayoutBase : WasabiComponentBase, IStackLayout
     {
+        public WasabiStackLayoutBase()
+        {
+            StyleMapper.Add("margin", Margin);
+        }
+
         public StackOrientation Orientation { get; set; }
 
         public double Spacing { get; set; } = 0;
@@ -36,7 +41,10 @@ namespace WasabiUI.Forms.Components
         public IVisual Visual { get; set; }
         public LayoutOptions VerticalOptions { get; set; }
         public LayoutOptions HorizontalOptions { get; set; }
+
+        [Parameter]
         public Xamarin.Forms.Thickness Margin { get; set; }
+
         public double MarginLeft { get; set; }
         public double MarginTop { get; set; }
         public double MarginRight { get; set; }
@@ -48,6 +56,8 @@ namespace WasabiUI.Forms.Components
         public double PaddingBottom { get; set; }
         public bool IsClippedToBounds { get; set; }
         public bool CascadeInputTransparent { get; set; }
+
+        
         public IList<View> Children { get; set; }
     }
 }
