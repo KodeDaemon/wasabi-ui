@@ -2,13 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using AutoMapper;
 using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.Extensions.DependencyInjection;
 using WasabiUI.Forms.Components;
 using WasabiUI.Forms.Core;
-using WasabiUI.Forms.Core.Renderers;
 using Xamarin.Forms;
 
 namespace WasabiUI.Forms.Platform.Blazor.Renderers
@@ -21,28 +17,15 @@ namespace WasabiUI.Forms.Platform.Blazor.Renderers
         
         public void Render(RenderTreeBuilder builder)
         {
-            builder.OpenElement(3, "div");
 
-            BuildStyle<WasabiStackLayout>(builder);
+            builder.OpenComponent<WasabiStackLayout>(1);
+
+            builder.AddAttribute(3, "Margin", Element.Margin);
+            //builder.AddAttribute(5, "Children", Element.Children);
 
             RenderComponents(ComponentContainer.Children, builder);
 
             builder.CloseElement();
-        }
-
-        protected override void BuildStyle<T>(RenderTreeBuilder builder)
-        {
-            base.BuildStyle<T>(builder);
-        }
-
-        protected override string DictionaryToProperties(Dictionary<string, string> dictionary)
-        {
-            return base.DictionaryToProperties(dictionary);
-        }
-
-        protected override string ConvertStylePropertyValue(object value)
-        {
-            return base.ConvertStylePropertyValue(value);
         }
 
         protected void RenderComponents(IEnumerable<IWasabiComponentHandle> components, RenderTreeBuilder builder)

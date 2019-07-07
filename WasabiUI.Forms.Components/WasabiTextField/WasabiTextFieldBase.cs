@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace WasabiUI.Forms.Components
 {
-    public class WasabiTextFieldBase : ComponentBase
+    public class WasabiTextFieldBase : WasabiComponentBase
     {
         [Parameter]
         public string Text { get; set; }
